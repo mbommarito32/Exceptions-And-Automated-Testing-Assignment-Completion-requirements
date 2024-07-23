@@ -1,0 +1,48 @@
+#Marissa Bommarito - IT534 Professor ADDNAME
+
+#Professor, according to my research and study for the project, it appears in recent iterations of Python, PyDoc is embedded in default Python in most IDE's.
+
+
+class ValueSorter: #empty lists for users to input values
+    def __init__(self):
+        self.string_input_values = [] #List for string input
+        self.float_input_values = [] #List for float input
+        self.integer_input_values = [] #List for integer input
+
+    def validate_input_string(self, value): #Check if the value contains ONLY upper- & lower-case characters
+        return all(c.isalpha() for c in value)
+
+    def Input_ValueSorter(self, value):
+        try:
+            if isinstance(value, str):
+                if self.validate_input_string(value):
+                    self.string_input_values.append(value) #Add valid string to the string_values list
+                else:
+                    print(f"Sorry! This string is not valid: {value}") #Error message for invalid strings
+            elif isinstance(value, float):
+                self.float_input_values.append(value)
+            elif isinstance(value, int):
+                self.integer_input_values.append(value)
+            else:
+                print(f"Oops! This data type is not supported: {type(value)}") #Error message for invalid strings
+        except Exception as e:
+            print(f"Uh oh! Here is Your Error: {e}") #Error message for invalid strings
+
+    def ValueSorter_loop(self):
+        while True:
+            user_input = input("Please enter a value (or type 'stop' to quit the program): ") #User input space
+            if user_input.lower() == "stop": #typing stop returns entries
+                break
+            try:
+                value = eval(user_input)  # Evaluate user input
+                self.Input_ValueSorter(value)
+            except Exception as e:
+                print(f"Whoops! Error occured: {e}") #Error message for invalid strings
+
+if __name__ == "__main__":
+    sorter = ValueSorter()
+    sorter.ValueSorter_loop()
+    # Print the sorted lists
+    print("Here are your String values:", sorter.string_input_values) #Values from user input shown
+    print("Here are your Float values:", sorter.float_input_values) #Values from user input shown
+    print("Here are your Integer values:", sorter.integer_input_values) #Values from user input shown
